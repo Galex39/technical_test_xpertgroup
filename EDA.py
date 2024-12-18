@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.preprocessing import StandardScaler
 
 # Data Preparation Function
 def prepare_data(df):
@@ -51,14 +50,6 @@ def handle_missing_values(df):
             print(f"Valores nulos en '{column}' rellenados con la moda ('{mode_value}').")
 
     return df, missing_summary, handled_nulls
-
-# Standardize Numeric Features
-def standardize_numeric_features(df, columns):
-    print("Estandarizando columnas numéricas...")
-    scaler = StandardScaler()
-    df[columns] = scaler.fit_transform(df[columns])
-    print(f"Columnas estandarizadas: {columns}")
-    return df, columns
 
 # Descriptive Statistics Function
 def generate_descriptive_stats(df):
