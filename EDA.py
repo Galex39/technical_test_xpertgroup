@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
-from matplotlib.backends.backend_pdf import PdfPages
 
 # Data Preparation Function
 def prepare_data(df):
@@ -165,29 +164,6 @@ def category_analysis(df):
     plt.close()
     
     return category_performance
-
-def generate_model_report(models_results, final_model, X_test, y_test):
-    with PdfPages("Model_Report.pdf") as pdf:
-        for model_name, metrics in models_results.items():
-            plt.figure()
-            plt.text(0.1, 0.8, f"Modelo: {model_name}", fontsize=12)
-            plt.text(0.1, 0.6, f"RMSE: {metrics['RMSE']}", fontsize=10)
-            plt.text(0.1, 0.4, f"MAE: {metrics['MAE']}", fontsize=10)
-            plt.axis('off')
-            pdf.savefig()
-            plt.close()
-
-        # Predicciones del modelo final
-        y_pred = final_model.predict(X_test)
-        plt.figure(figsize=(10, 6))
-        plt.scatter(y_test, y_pred, alpha=0.7)
-        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--')
-        plt.xlabel("Valores Reales")
-        plt.ylabel("Predicciones")
-        plt.title("Predicciones vs Reales")
-        pdf.savefig()
-        plt.close()
-    print("Informe de modelo generado: 'Model_Report.pdf'")
 
 # Main Execution
 def main():
